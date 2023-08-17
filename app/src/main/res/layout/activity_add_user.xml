@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddUser">
+
+    <ImageView
+        android:id="@+id/btBack"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="12dp"
+        android:alpha="0.6"
+        android:background="@drawable/round_sel"
+        android:contentDescription="@string/des"
+        android:elevation="4dp"
+        android:foreground="?selectableItemBackground"
+        android:padding="4dp"
+        android:src="@drawable/round_arrow_back_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:animateLayoutChanges="true">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btToapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="#3CFFEF"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:contentDescription="@string/des"
+                    android:src="@drawable/ic_women"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp" />
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:paddingHorizontal="8dp"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/etName"
+                app:layout_constraintStart_toStartOf="@id/etName" />
+
+            <EditText
+                android:id="@+id/etName"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="180dp"
+                android:hint="Name"
+                android:importantForAutofill="no"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:paddingHorizontal="8dp"
+                android:text="Husband Name"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/etHName"
+                app:layout_constraintStart_toStartOf="@id/etHName" />
+
+            <EditText
+                android:id="@+id/etHName"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="40dp"
+                android:hint="Husband Name"
+                android:importantForAutofill="no"
+                app:layout_constraintTop_toBottomOf="@id/etName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:paddingHorizontal="8dp"
+                android:text="Phone no"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/etPhno"
+                app:layout_constraintStart_toStartOf="@id/etPhno" />
+
+            <EditText
+                android:id="@+id/etPhno"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:inputType="number"
+                android:layout_marginHorizontal="32dp"
+                android:maxLength="10"
+                android:layout_marginTop="40dp"
+                android:hint="Phone no"
+                android:importantForAutofill="no"
+                app:layout_constraintTop_toBottomOf="@id/etHName" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:paddingHorizontal="8dp"
+                android:text="Date of Birth"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/llDob"
+                app:layout_constraintStart_toStartOf="@id/llDob" />
+
+            <LinearLayout
+                android:id="@+id/llDob"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintTop_toBottomOf="@id/etPhno">
+
+                <EditText
+                    android:id="@+id/etDob"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="DD/MM/YYYY"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    app:layout_constraintTop_toBottomOf="@id/etName" />
+
+                <ImageView
+                    android:id="@+id/btDOB"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/round_sel"
+                    android:contentDescription="@string/des"
+                    android:padding="8dp"
+                    android:src="@drawable/baseline_calendar_today_black_24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/tt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_sel"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#3CFFEF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:padding="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/llDob">
+
+                <ImageView
+                    android:id="@+id/btPreg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@drawable/round_non_sel"
+                    android:contentDescription="@string/des"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_preg" />
+
+                <ImageView
+                    android:id="@+id/btLac"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/round_non_sel"
+                    android:contentDescription="@string/des"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_lactation" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPregOrLac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:paddingHorizontal="8dp"
+                android:text="Date of Delivery"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/llPorL"
+                app:layout_constraintStart_toStartOf="@id/llPorL" />
+
+            <LinearLayout
+                android:id="@+id/llPorL"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="40dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tt">
+
+                <EditText
+                    android:id="@+id/etP"
+                    style="@style/EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="DD/MM/YYYY"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    app:layout_constraintTop_toBottomOf="@id/etName" />
+
+                <ImageView
+                    android:id="@+id/btDOP"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/round_sel"
+                    android:contentDescription="@string/des"
+                    android:padding="8dp"
+                    android:src="@drawable/baseline_calendar_today_black_24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toBottomOf="@id/llPorL"
+                tools:layout_editor_absoluteX="32dp">
+
+                <ImageView
+                    android:id="@+id/imgadhar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/aadhar_holder"
+                    android:contentDescription="@string/des"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
+
+            <EditText
+                android:id="@+id/etAadhar"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="12dp"
+                android:hint="Aadhaar No"
+                android:importantForAutofill="no"
+                app:layout_constraintTop_toBottomOf="@id/cardView4" />
+
+            <LinearLayout
+                android:id="@+id/childCont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/etAadhar">
+
+
+                <ImageView
+                    android:id="@+id/btAddChild"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@drawable/round_sel"
+                    android:contentDescription="@string/des"
+                    android:padding="4dp"
+                    android:src="@drawable/round_add_black_24dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="40dp"
+                android:background="@drawable/round_sel"
+                android:text="ADD Mother"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/childCont" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

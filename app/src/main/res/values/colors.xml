@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#64dd17</color>
+    <color name="primary_light">#9cff57</color>
+    <color name="primary_dark">#1faa00</color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+    <color name="trans">#00FFFFFF</color>
+    <color name="colPreg">#B8FFF8</color>
+    <color name="colLac">#F7EAE9</color>
+    <color name="colnor">#DCFFC4</color>
+</resources>

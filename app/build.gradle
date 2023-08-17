@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.tomer.anibadi'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.tomer.anibadi"
+        minSdk 29
+        targetSdk 33
+        versionCode 1
+        versionName "1.0.1"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures{
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.2'
+    // CameraX core library using the camera2 implementation
+    def camerax_version = "1.2.1"
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    implementation "androidx.camera:camera-view:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+//    implementation "androidx.camera:camera-video:${camerax_version}"
+//    implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+
+task copyApk(type :Copy){
+    def sourceDest = layout.projectDirectory.dir("release/app-release.apk")
+    def destDir = "/home/tom/apks"
+    from sourceDest
+    into destDir
+    rename "app-release.apk", rootProject.name+".apk"
+}
+
+tasks.whenTaskAdded { task->
+    if(task.name =="assembleRelease"){
+        task.finalizedBy "copyApk"
+    }
+}
