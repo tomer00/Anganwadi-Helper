@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+  <path
+      android:pathData="M446.51,512H65.49C29.38,512 0,482.62 0,446.51v-273.86c0,-9.86 8,-17.86 17.86,-17.86H494.14c9.86,0 17.86,8 17.86,17.86v273.86C512,482.62 482.62,512 446.51,512z"
+      android:fillColor="#F1F2F2"/>
+  <path
+      android:pathData="M494.14,154.79H256V512h190.51c36.11,0 65.49,-29.38 65.49,-65.49v-273.86C512,162.79 504,154.79 494.14,154.79z"
+      android:fillColor="#BCBEC0"/>
+  <path
+      android:pathData="M512,190.51H0V65.49C0,29.32 29.32,0 65.49,0h381.02C482.68,0 512,29.32 512,65.49V190.51z"
+      android:fillColor="#FFCE3E"/>
+  <path
+      android:pathData="M512,65.49C512,29.32 482.68,0 446.51,0H256v190.51h256V65.49z"
+      android:fillColor="#F59D00"/>
+  <path
+      android:pathData="M92.37,0h35.72v190.51h-35.72z"
+      android:fillColor="#F59D00"/>
+  <path
+      android:pathData="M154.79,0h35.72v190.51h-35.72z"
+      android:fillColor="#F59D00"/>
+  <path
+      android:pathData="M256,392.93c-75.5,0 -136.93,-61.43 -136.93,-136.93S180.5,119.07 256,119.07S392.93,180.5 392.93,256S331.5,392.93 256,392.93z"
+      android:fillColor="#BCBEC0"/>
+  <path
+      android:pathData="M256,119.07v273.86c75.5,0 136.93,-61.43 136.93,-136.93S331.5,119.07 256,119.07z"
+      android:fillColor="#808285"/>
+  <path
+      android:pathData="M256,333.39c-42.68,0 -77.39,-34.72 -77.39,-77.39s34.72,-77.39 77.39,-77.39s77.39,34.72 77.39,77.39S298.68,333.39 256,333.39z"
+      android:fillColor="#FEE856"/>
+  <path
+      android:pathData="M428.65,146.61h-47.63c-9.86,0 -17.86,-8 -17.86,-17.86V81.12c0,-9.86 8,-17.86 17.86,-17.86h47.63c9.86,0 17.86,8 17.86,17.86v47.63C446.51,138.61 438.52,146.61 428.65,146.61z"
+      android:fillColor="#FFCE3E"/>
+  <path
+      android:pathData="M256,178.6v154.79c42.68,0 77.39,-34.72 77.39,-77.39S298.68,178.6 256,178.6z"
+      android:fillColor="#FFCE3E"/>
+</vector>

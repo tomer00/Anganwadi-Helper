@@ -12,6 +12,7 @@
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/et_bg"
+        app:layout_constraintWidth_max="400dp"
         android:padding="4dp"
         app:layout_constraintEnd_toStartOf="@id/tt"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/baseline_person_search_black_24dp" />
+            android:src="@drawable/baseline_person_search_black_24dp"
+            android:contentDescription="@string/des" />
 
         <EditText
             android:id="@+id/etSea"
@@ -29,6 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/trans"
+            android:hint="@string/type_name"
+            android:inputType="text"
+            android:autofillHints="names"
             android:paddingHorizontal="12dp"
             android:paddingVertical="4dp"
             android:textColor="@color/black" />
@@ -80,10 +85,11 @@
         android:layout_height="52dp"
         android:layout_margin="20dp"
         android:src="@drawable/round_add_black_24dp"
-        app:backgroundTint="@color/primary"
+        app:tint="@color/black"
+        app:backgroundTint="@color/primary_light"
         app:fabCustomSize="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/des" />
+        android:contentDescription="@string/default_web_client_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

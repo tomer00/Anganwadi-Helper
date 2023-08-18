@@ -11,7 +11,6 @@ import android.os.Environment
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +21,7 @@ import com.tomer.anibadi.adap.AdapMain
 import com.tomer.anibadi.databinding.ActivityMainBinding
 import com.tomer.anibadi.modal.Mother
 import com.tomer.anibadi.modal.MotherRv
-import com.tomer.anibadi.util.CipherUtils
+import com.tomer.anibadi.util.KeyStoreUtil
 import com.tomer.anibadi.util.Repo
 import java.io.File
 import kotlin.random.Random
@@ -58,13 +57,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }) {
         if (!it.equals("no")) {
-            Log.d("TAG--", "new Item inseryed: ")
             val i = gson.fromJson(it, Mother::class.java)
             mainList.add(i)
             var col = ContextCompat.getColor(this, R.color.colnor)
-            if (i.isPreg) col = ContextCompat.getColor(this, R.color.colPreg)
-            if (i.isLactating) col = ContextCompat.getColor(this, R.color.colLac)
-            val mRv = MotherRv(i.ID, i.name + " " + i.hName, col, i.isPreg, i.isLactating, i.name[0].toString())
+            var icon = R.drawable.ic_women
+            if (i.isPreg) {
+                icon = R.drawable.ic_preg
+                col = ContextCompat.getColor(this, R.color.colPreg)
+            }
+            if (i.isLactating) {
+                icon = R.drawable.ic_lactation
+                col = ContextCompat.getColor(this, R.color.colLac)
+            }
+            val mRv = MotherRv(i.ID, i.name, i.hName, col, i.isPreg, i.isLactating, ContextCompat.getDrawable(this, icon)!!)
             listRv.add(mRv)
             adap.mainL.beginBatchedUpdates()
             adap.mainL.add(mRv)
@@ -87,9 +92,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mainList.addAll(repo.getALLMother())
         for (i in mainList) {
             var col = ContextCompat.getColor(this, R.color.colnor)
-            if (i.isPreg) col = ContextCompat.getColor(this, R.color.colPreg)
-            if (i.isLactating) col = ContextCompat.getColor(this, R.color.colLac)
-            listRv.add(MotherRv(i.ID, i.name + " " + i.hName, col, i.isPreg, i.isLactating, i.name[0].toString()))
+            var icon = R.drawable.ic_women
+            if (i.isPreg) {
+                icon = R.drawable.ic_preg
+                col = ContextCompat.getColor(this, R.color.colPreg)
+            }
+            if (i.isLactating) {
+                icon = R.drawable.ic_lactation
+                col = ContextCompat.getColor(this, R.color.colLac)
+            }
+            listRv.add(MotherRv(i.ID, i.name, i.hName, col, i.isPreg, i.isLactating, ContextCompat.getDrawable(this, icon)!!))
         }
         b.rvMain.adapter = adap
         adap.search(listRv, false)
@@ -115,12 +127,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
         checkForPass()
-        val b = File(cacheDir, "te.txt")
-        b.deleteOnExit()
-
-        CipherUtils.encString("hii tis is tmoer", b.outputStream())
-
-        Log.d("TAG--", "onCreate: ${CipherUtils.decString(b.inputStream())}")
     }
 
     //endregion ACTIVITY
@@ -155,15 +161,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private fun checkForPass(){
-       val f= File(getExternalFilesDir("secret"), "key")
-        if (!f.exists()){
+    private fun checkForPass() {
+        val f = File(getExternalFilesDir("secret"), "key")
+        if (!f.exists()) {
             val r = Random(System.currentTimeMillis())
-            val sb = r.nextBytes(16)
-            f.outputStream().use {
-                it.write(sb)
-                it.flush()
-            }
+            val sb = r.nextBytes(32)
+            KeyStoreUtil.encString(sb, f.outputStream())
         }
     }
 

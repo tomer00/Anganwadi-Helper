@@ -5,8 +5,8 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
     android:foreground="?selectableItemBackground"
     app:cardElevation="4dp"
     tools:viewBindingIgnore="true">
@@ -15,35 +15,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
-            <TextView
+            <ImageView
                 android:id="@+id/tv_dp"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/dp_bg"
-                android:gravity="center"
-                android:text="S"
-                android:textColor="@color/black"
                 android:layout_margin="12dp"
                 android:elevation="4dp"
+                android:src="@drawable/ic_women"
+                android:padding="4dp"
+                android:contentDescription="@string/des"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:targetApi="o" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
+            android:textStyle="bold"
             android:textSize="22sp"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_dp"
+            android:paddingHorizontal="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_dp"
             app:layout_constraintTop_toTopOf="@id/tv_dp" />
+
+        <TextView
+            android:id="@+id/tvHName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_dp"
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

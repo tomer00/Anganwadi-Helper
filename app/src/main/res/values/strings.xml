@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Anibadi</string>
     <string name="des">des</string>
+    <string name="aadhaar_no">Aadhaar No</string>
+    <string name="name">Name</string>
+    <string name="husband_name">Husband Name</string>
+    <string name="phone_no">Phone no</string>
+    <string name="dob">Date of Birth</string>
+    <string name="format">DD/MM/YYYY</string>
+    <string name="type_name">Type Name</string>
 </resources>

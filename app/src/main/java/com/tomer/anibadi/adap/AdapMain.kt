@@ -3,8 +3,10 @@ package com.tomer.anibadi.adap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SortedList
 import com.tomer.anibadi.R
@@ -24,8 +26,9 @@ class AdapMain(
 
     override fun onBindViewHolder(Holder: Holder, position: Int) {
         val item = mainL[position]
-        Holder.tvdp.text = item.dps
+        Holder.tvDp.setImageDrawable(item.icon)
         Holder.tv.text = item.name
+        "Husband: ${item.husbandName}".also { Holder.tvH.text = it }
         Holder.card.setCardBackgroundColor(item.bgColor)
     }
 
@@ -92,8 +95,9 @@ class AdapMain(
 
 
     class Holder(itemView: View, ml: M_L) : RecyclerView.ViewHolder(itemView) {
-        val tvdp: TextView = itemView.findViewById(R.id.tv_dp)
+        val tvDp: ImageView = itemView.findViewById(R.id.tv_dp)
         val tv: TextView = itemView.findViewById(R.id.tvName)
+        val tvH: TextView = itemView.findViewById(R.id.tvHName)
         val card: CardView = itemView.findViewById(R.id.cardView)
 
         init {

@@ -5,18 +5,15 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import com.google.gson.Gson
 import com.tomer.anibadi.adap.WidService
 import com.tomer.anibadi.databinding.ActivityAddUserBinding
@@ -77,11 +74,10 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
         if (arr != null) {
             try {
                 val ois = fileAadhar.outputStream()
-                CipherUtils.encrypt(ByteArrayInputStream(arr), ois)
+                CipherUtils.encrypt(ByteArrayInputStream(arr), ois, this.applicationContext)
+                b.imgCamOverLay.visibility = View.GONE
                 b.imgadhar.setImageBitmap(BitmapFactory.decodeByteArray(arr, 0, arr.size))
-                Log.d("TAG--", "82: ${arr.size}")
-            } catch (e: Exception) {
-                Log.e("TAG--", ": 83", e)
+            } catch (_: Exception) {
             }
         }
     }
@@ -173,13 +169,14 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
 
 
             thread {
-                val newFile = File(getExternalFilesDir("aadhar"), "${motherId}")
+                val newFile = File(getExternalFilesDir("aadhar"), motherId)
                 if (newFile.exists()) {
-                    val tempFile = File(externalCacheDir, motherId)
-                    tempFile.deleteOnExit()
-                    CipherUtils.decrypt(newFile.inputStream(), tempFile.outputStream())
+                    val tempFile = File(getExternalFilesDir("cache"), motherId)
+                    CipherUtils.decrypt(newFile.inputStream(), tempFile.outputStream(), applicationContext)
                     b.imgadhar.post {
-                        b.imgadhar.setImageURI(tempFile.getURI())
+                        b.imgCamOverLay.visibility = View.GONE
+                        b.imgadhar.setImageBitmap(BitmapFactory.decodeFile(tempFile.absolutePath))
+                        tempFile.delete()
                     }
                 }
             }
@@ -379,9 +376,6 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
             startService(int)
         }
     }
-
-
-    private fun File.getURI(): Uri = FileProvider.getUriForFile(applicationContext, "com.tomer.anibadi.fileProvider", this)
 
     //endregion USER DEFINED
 

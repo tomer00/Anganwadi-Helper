@@ -15,7 +15,6 @@
         android:background="@drawable/round_sel"
         android:contentDescription="@string/des"
         android:elevation="4dp"
-        android:foreground="?selectableItemBackground"
         android:padding="4dp"
         android:src="@drawable/round_arrow_back_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +27,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:animateLayoutChanges="true">
+            android:animateLayoutChanges="true"
+            android:paddingBottom="20dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btToapp"
@@ -43,10 +42,10 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:contentDescription="@string/des"
-                    android:src="@drawable/ic_women"
                     android:layout_width="120dp"
-                    android:layout_height="120dp" />
+                    android:layout_height="120dp"
+                    android:contentDescription="@string/des"
+                    android:src="@drawable/ic_women" />
             </androidx.cardview.widget.CardView>
 
 
@@ -55,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:paddingHorizontal="8dp"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/etName"
@@ -68,7 +67,7 @@
                 android:layout_height="44dp"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="180dp"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:importantForAutofill="no"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:paddingHorizontal="8dp"
-                android:text="Husband Name"
+                android:text="@string/husband_name"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/etHName"
@@ -91,7 +90,7 @@
                 android:layout_height="44dp"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="40dp"
-                android:hint="Husband Name"
+                android:hint="@string/husband_name"
                 android:importantForAutofill="no"
                 app:layout_constraintTop_toBottomOf="@id/etName" />
 
@@ -100,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:paddingHorizontal="8dp"
-                android:text="Phone no"
+                android:text="@string/phone_no"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/etPhno"
@@ -111,12 +110,12 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:inputType="number"
                 android:layout_marginHorizontal="32dp"
-                android:maxLength="10"
                 android:layout_marginTop="40dp"
-                android:hint="Phone no"
+                android:hint="@string/phone_no"
                 android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="10"
                 app:layout_constraintTop_toBottomOf="@id/etHName" />
 
 
@@ -125,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:paddingHorizontal="8dp"
-                android:text="Date of Birth"
+                android:text="@string/dob"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@id/llDob"
@@ -145,7 +144,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:hint="DD/MM/YYYY"
+                    android:hint="@string/format"
                     android:importantForAutofill="no"
                     android:inputType="number"
                     android:maxLength="10"
@@ -171,12 +170,12 @@
                 android:id="@+id/tt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round_sel"
                 android:layout_marginTop="20dp"
+                android:background="@drawable/round_sel"
                 android:backgroundTint="#3CFFEF"
+                android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:padding="4dp"
                 app:layout_constraintTop_toBottomOf="@+id/llDob">
 
                 <ImageView
@@ -255,19 +254,41 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="20dp"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:layout_constraintTop_toBottomOf="@id/llPorL"
-                tools:layout_editor_absoluteX="32dp">
+                app:layout_constraintTop_toBottomOf="@id/llPorL">
 
-                <ImageView
-                    android:id="@+id/imgadhar"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/aadhar_holder"
-                    android:contentDescription="@string/des"
-                    android:scaleType="centerCrop" />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imgadhar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/des"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/aadhar_holder"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imgCamOverLay"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="#66000000"
+                        android:contentDescription="@string/des"
+                        android:src="@drawable/ic_cam"
+                        android:padding="68dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <EditText
@@ -277,7 +298,7 @@
                 android:layout_height="44dp"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="12dp"
-                android:hint="Aadhaar No"
+                android:hint="@string/aadhaar_no"
                 android:importantForAutofill="no"
                 app:layout_constraintTop_toBottomOf="@id/cardView4" />
 
@@ -307,8 +328,8 @@
                 android:id="@+id/btDone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="40dp"
                 android:background="@drawable/round_sel"
+                android:paddingHorizontal="40dp"
                 android:text="ADD Mother"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

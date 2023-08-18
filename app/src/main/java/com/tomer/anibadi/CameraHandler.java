@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Size;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -42,7 +44,6 @@ public class CameraHandler extends AppCompatActivity {
     private ImageView btCap;
     private ImageView imgPrev;
     private OverLayView overLayView;
-    private boolean isRes = false;
     private boolean isCap = false;
     private boolean doFinish = true;
     private Bitmap currentBitmap;
@@ -72,9 +73,6 @@ public class CameraHandler extends AppCompatActivity {
         btCap.setOnClickListener((_v) -> takePicture());
         findViewById(R.id.btBackCam).setOnClickListener((_v) -> finish());
 
-        btCap.requestFocus();
-
-
         aadhaarAnalyser = new AadhaarAnalyser(((rect, strFromAna, found) -> {
             overLayView.setRect(rect);
             if (found) {
@@ -92,9 +90,9 @@ public class CameraHandler extends AppCompatActivity {
 
         cameraProviderListenableFuture = ProcessCameraProvider.getInstance(this);
 
-        btCap.postDelayed(() -> {
+        overLayView.postDelayed(() -> {
             aadhaarAnalyser.setValidRect(overLayView.getMainRect());
-        }, 100);
+        }, 200);
 
     }
 
@@ -115,8 +113,7 @@ public class CameraHandler extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (!isRes)
-            previewView.post(this::startCAm);
+        previewView.post(this::startCAm);
     }
 
     @Override
@@ -183,8 +180,6 @@ public class CameraHandler extends AppCompatActivity {
 
     public void takePicture() {
 
-
-
         if (isCap) {
 
             if (aaNO.isEmpty()) {
@@ -208,10 +203,9 @@ public class CameraHandler extends AppCompatActivity {
         overLayView.clickPhoto();
         Rect re = overLayView.getMainRect();
         currentBitmap = Bitmap.createBitmap(previewView.getBitmap(), 0, re.top, overLayView.getWidth(), re.height());
-        overLayView.postDelayed(() -> {
-            showImg();
-            stopCAm();
-        }, 200);
+        showImg();
+        overLayView.postDelayed(this::stopCAm, 200);
+        doFinish = false;
     }
 
 

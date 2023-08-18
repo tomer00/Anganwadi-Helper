@@ -50,24 +50,28 @@ class AadhaarAnalyser(
         for (block in visionText.textBlocks) {
             for (line in block.lines) {
                 val text = line.text.trim()
-                if (isAAno(text) && text.length > 12) {
-                    rect = line.boundingBox!!
-                    found = true
-                    aano = text
-                } else {
-                    if (text.contains("DOB") && text.length > 6) {
-                        dob = text.subSequence(text.indexOf("DOB") + 5, text.length).toString()
+                try {
+                    if (isAAno(text) && text.length > 12) {
+                        rect = line.boundingBox!!
+                        found = true
+                        aano = text
                     } else {
-                        if (text.lowercase().contains("male") ||
-                            text.lowercase().contains("female") ||
-                            text.lowercase().contains("india")) {
+                        if (text.contains("DOB") && text.length > 6) {
+                            dob = text.subSequence(text.indexOf("DOB") + 5, text.length).toString()
                         } else {
-                            bul.append(text)
-                            bul.append(",,,")
+                            if (text.lowercase().contains("male") ||
+                                text.lowercase().contains("female") ||
+                                text.lowercase().contains("india")) {
+                            } else {
+                                bul.append(text)
+                                bul.append(",,,")
+                            }
                         }
-
                     }
+                } catch (_: Exception) {
+
                 }
+
             }
         }
         if (found && dob.isNotEmpty()) {
