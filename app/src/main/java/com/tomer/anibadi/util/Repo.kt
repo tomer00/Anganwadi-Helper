@@ -19,10 +19,6 @@ class Repo(private val con: Context) {
         return retKi
     }
 
-    fun removeAll() {
-        prefAll.edit().clear().apply()
-    }
-
     fun getMother(id: String): Mother {
         return gson.fromJson(prefAll.getString(id, ""), Mother::class.java)
     }

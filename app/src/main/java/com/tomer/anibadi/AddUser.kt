@@ -355,7 +355,7 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
                 b.etName.text.toString().trim(),
                 b.etDob.text.toString().trim(),
                 icon,
-                b.etP.text.toString().trim(),
+                b.etHName.text.toString().trim(),
                 b.etPhno.text.toString().trim(),
                 b.etAadhar.text.toString().trim()
             )

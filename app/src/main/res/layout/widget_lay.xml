@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="200dp"
+    android:layout_width="220dp"
     android:layout_height="wrap_content"
     android:forceDarkAllowed="false">
 
@@ -64,7 +64,7 @@
                     style="@style/EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="@string/name"
                     android:selectAllOnFocus="true"
                     android:textIsSelectable="true" />
 
@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:hint="DOB"
+                    android:hint="@string/dob"
                     android:selectAllOnFocus="true"
                     android:textIsSelectable="true" />
 
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:hint="Mother Name"
+                    android:hint="@string/husband_name"
                     android:selectAllOnFocus="true"
                     android:textIsSelectable="true" />
 
@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:hint="Aadhaar no"
+                    android:hint="@string/aadhaar_no"
                     android:selectAllOnFocus="true"
                     android:textIsSelectable="true" />
 
@@ -104,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:hint="Phone NO"
+                    android:hint="@string/phone_no"
                     android:selectAllOnFocus="true"
                     android:textIsSelectable="true" />
 

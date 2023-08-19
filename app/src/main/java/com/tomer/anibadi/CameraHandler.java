@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Size;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -90,9 +88,7 @@ public class CameraHandler extends AppCompatActivity {
 
         cameraProviderListenableFuture = ProcessCameraProvider.getInstance(this);
 
-        overLayView.postDelayed(() -> {
-            aadhaarAnalyser.setValidRect(overLayView.getMainRect());
-        }, 200);
+        overLayView.postDelayed(() -> aadhaarAnalyser.setValidRect(overLayView.getMainRect()), 200);
 
     }
 
@@ -129,6 +125,12 @@ public class CameraHandler extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.topfadein, R.anim.fadetobottom);
     }
 
     @Override
