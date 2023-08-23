@@ -22,7 +22,7 @@ class OverLayView : View {
 
     private val paintClear = Paint()
     private val paint = Paint()
-    private val paintClick = Paint()
+    private var colClick = 0
     private val rectNO = Rect(0, 0, 0, 0)
     private val rectBmp = Rect(0, 0, 0, 0)
     val mainRect = Rect(0, 0, 0, 0)
@@ -51,12 +51,6 @@ class OverLayView : View {
             xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
         }
 
-        paintClick.apply {
-            color = Color.WHITE
-            style = Paint.Style.FILL
-            alpha = 0
-        }
-
         paint.apply {
             color = Color.GREEN
             style = Paint.Style.STROKE
@@ -78,8 +72,7 @@ class OverLayView : View {
         canvas.drawRoundRect(rectNO.toRectF(), rectNO.height() / 2f, rectNO.height() / 2f, paint)
         canvas.drawBitmap(bmp, null, rectBmp, null)
 
-
-        if (cap) canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paintClick)
+        if (cap) canvas.drawColor(colClick)
 
     }
 
@@ -117,7 +110,7 @@ class OverLayView : View {
             duration = 180
             start()
         }.addUpdateListener {
-            paintClick.alpha = it.animatedValue as Int
+            colClick = Color.argb(it.animatedValue as Int, 255, 255, 255)
             postInvalidate()
         }
     }

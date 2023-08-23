@@ -11,7 +11,7 @@ import com.tomer.anibadi.R
 import com.tomer.anibadi.databinding.ChildRowBinding
 import com.tomer.anibadi.modal.Chilren
 
-class ChildManager(val con: Context, inflater: LayoutInflater, cont: ViewGroup, val lis: CLis, val pos: Int, val mod: Chilren?) : View.OnClickListener {
+class ChildManager(private val con: Context, inflater: LayoutInflater, cont: ViewGroup, private val lis: CLis, private val pos: Int, val mod: Chilren?) : View.OnClickListener {
 
     var isBoy = true
     var isVisible = true
@@ -33,7 +33,7 @@ class ChildManager(val con: Context, inflater: LayoutInflater, cont: ViewGroup, 
                 override fun onTextChanged(p0: CharSequence, p1: Int, p2: Int, p3: Int) {
                     if (p2 > p3) return
                     if (p0.length == 2 || p0.length == 5) {
-                        b.etDob.setText("$p0/")
+                        "$p0/".also { b.etDob.setText(it) }
                         b.etDob.setSelection(b.etDob.text.length)
                     }
                 }

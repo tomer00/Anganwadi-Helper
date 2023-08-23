@@ -15,11 +15,11 @@ import java.util.*
 
 class Utils {
     companion object {
-        private fun date(string: String): Date? {
-            return SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(string)
+        fun date(string: String): Date {
+            return SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(string)!!
         }
 
-        fun setAlarm(dob: String, con: Context) {
+        fun setAlarm(dob: String, con: Context, name: String) {
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.HOUR_OF_DAY, 8)
             calendar.set(Calendar.MINUTE, 0)
@@ -32,10 +32,12 @@ class Utils {
             }
             calendar.set(Calendar.DAY_OF_MONTH, "${dob[0]}${dob[1]}".toInt())
             calendar.add(Calendar.DATE, 1)
-            val intent = Intent(con.applicationContext, NotRec::class.java)
+            val intent = Intent(con.applicationContext, NotRec::class.java).apply { 
+                putExtra("name",name)
+            }
             val pendingIntent = PendingIntent.getBroadcast(
                 con.applicationContext,
-                123, intent, PendingIntent.FLAG_IMMUTABLE
+                (name + dob).hashCode(), intent, PendingIntent.FLAG_IMMUTABLE
             )
             val alarmManager = con.applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.set(AlarmManager.RTC, calendar.timeInMillis, pendingIntent)
@@ -43,19 +45,19 @@ class Utils {
 
         @SuppressLint("NewApi")
         fun getMonths(dob: String): Int {
-            val date = date(dob)!!
+            val date = date(dob)
             val cal = Calendar.getInstance()
             cal.time = date
             val p = Period.between(LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH)), LocalDate.now())
             return p.months + (p.years * 12)
         }
 
-        fun getDr(con: Context, int: Int): Drawable? {
+        fun getDr(con: Context, int: Int): Drawable {
             return when (int) {
-                0 -> ContextCompat.getDrawable(con, R.drawable.ic_c0_6m)
-                2 -> ContextCompat.getDrawable(con, R.drawable.ic_c3_6y)
-                1 -> ContextCompat.getDrawable(con, R.drawable.ic_c6_3y)
-                else -> ContextCompat.getDrawable(con, R.drawable.ic_women)
+                0 -> ContextCompat.getDrawable(con, R.drawable.ic_c0_6m)!!
+                2 -> ContextCompat.getDrawable(con, R.drawable.ic_c3_6y)!!
+                1 -> ContextCompat.getDrawable(con, R.drawable.ic_c6_3y)!!
+                else -> ContextCompat.getDrawable(con, R.drawable.ic_women)!!
             }
         }
 

@@ -27,6 +27,7 @@ import com.tomer.anibadi.util.Repo
 import com.tomer.anibadi.util.Utils
 import java.io.ByteArrayInputStream
 import java.io.File
+import java.util.Calendar
 import java.util.Date
 import kotlin.concurrent.thread
 import kotlin.random.Random
@@ -221,6 +222,7 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
         val bi = CalDiaBinding.inflate(layoutInflater)
         build.setView(bi.root)
         val pic = bi.datePixker
+        pic.maxDate = System.currentTimeMillis()
         bi.btDone.setOnClickListener {
             setDate(pic.dayOfMonth, pic.month, pic.year)
             calDia.dismiss()
@@ -269,6 +271,19 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
     }
 
 
+    private fun isValidDate(et: EditText): Boolean {
+        val eDate = Utils.date(et.text.toString())
+        if (Date().before(eDate)) return false
+
+        val cal = Calendar.getInstance().apply {
+            set(Calendar.YEAR, 1923)
+        }
+        if (eDate.before(cal.time)) return false
+
+        return true
+    }
+
+
     private fun saveMother() {
         if (b.etName.text.isNullOrEmpty()) {
             b.etName.error = "Enter Name"
@@ -280,7 +295,7 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
             b.etHName.requestFocus()
             return
         }
-        if (b.etDob.text.isNullOrEmpty() || b.etDob.text.length < 10) {
+        if (b.etDob.text.isNullOrEmpty() || b.etDob.text.length < 10 || !isValidDate(b.etDob)) {
             b.etDob.error = "Incorrect DOB"
             b.etDob.requestFocus()
             return
@@ -303,7 +318,7 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
                     i.b.etName.error = "Enter Name"
                     return
                 }
-                if (i.b.etDob.text.isNullOrEmpty() || i.b.etDob.text.length < 10) {
+                if (i.b.etDob.text.isNullOrEmpty() || i.b.etDob.text.length < 10 || !isValidDate(i.b.etDob)) {
                     i.b.etDob.error = "Incorrect DOB"
                     return
                 }
@@ -334,7 +349,7 @@ class AddUser : AppCompatActivity(), View.OnClickListener, ChildManager.CLis {
             children
         )
         repo.saveMother(mother)
-        for (i in children) Utils.setAlarm(i.dob, this)
+        for (i in children) Utils.setAlarm(i.dob, this,i.name)
         if (isContra) {
             val intent = Intent()
             intent.putExtra("data", gson.toJson(mother))

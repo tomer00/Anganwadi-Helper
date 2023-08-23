@@ -8,4 +8,7 @@
     <string name="dob">Date of Birth</string>
     <string name="format">DD/MM/YYYY</string>
     <string name="type_name">Type Name</string>
+    <string name="date_format">DD/MM/YYYY</string>
+    <string name="date_of_delivery">Date of Delivery</string>
+    <string name="add_mother">ADD Mother</string>
 </resources>

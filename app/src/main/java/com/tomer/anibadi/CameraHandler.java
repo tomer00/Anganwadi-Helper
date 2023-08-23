@@ -93,14 +93,14 @@ public class CameraHandler extends AppCompatActivity {
     }
 
     private void showImg() {
-        runOnUiThread(() -> {
+        btCap.postDelayed(() -> {
             imgPrev.setImageBitmap(currentBitmap);
             imgPrev.setVisibility(View.VISIBLE);
             previewView.setVisibility(View.INVISIBLE);
 
             btCap.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.round_done_black_24dp));
             isCap = true;
-        });
+        }, 180);
     }
 
 
