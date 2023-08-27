@@ -39,11 +39,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val listRv = mutableListOf<MotherRv>()
     private val lis = object : AdapMain.M_L {
         override fun onMainLis(pos: Int) {
-            perfornNextScreen(pos)
+            performNextScreen(pos)
         }
     }
 
-    private val contarct = registerForActivityResult(object : ActivityResultContract<String, String>() {
+    private val contract = registerForActivityResult(object : ActivityResultContract<String, String>() {
 
         override fun createIntent(context: Context, input: String): Intent {
             return Intent(this@MainActivity, AddUser::class.java)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private var isPreg = false
+    private var isPrg = false
     private var isLacto = false
 
     //endregion GLOBAL
@@ -124,8 +124,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             })
         }
-
-
         checkForPass()
     }
 
@@ -135,26 +133,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun searchE(newText: String, isPos: Boolean) {
         val newL = mutableListOf<MotherRv>()
         for (i in listRv) {
-            if (!isLacto && !isPreg) {
-                if (i.name.lowercase()
-                        .startsWith(
-                            newText.lowercase()
-                                .trim()
-                        )) newL.add(i)
-            } else if (i.name.lowercase().startsWith(newText.lowercase().trim()) && i.isPreg == isPreg && i.isLacta == isLacto) newL.add(i)
+            if (!isLacto && !isPrg) {
+                if (i.name.lowercase().startsWith(newText.lowercase().trim()) || i.husbandName.lowercase().startsWith(newText.lowercase().trim())) newL.add(i)
+            } else if (i.name.lowercase().startsWith(newText.lowercase().trim()) && i.isPreg == isPrg && i.isLacta == isLacto) newL.add(i)
 
         }
         adap.search(newL, isPos)
         b.rvMain.smoothScrollToPosition(0)
     }
 
-    private fun perfornNextScreen(pos: Int) {
+    private fun performNextScreen(pos: Int) {
         for (i in mainList) {
             if (i.ID == adap.mainL[pos].ID) {
                 val intent = Intent(this@MainActivity, AddUser::class.java)
                 intent.putExtra("id", i.ID)
                 startActivity(intent)
-                overridePendingTransition(0, R.anim.fadezoomout)
+                overridePendingTransition(R.anim.topfadein, R.anim.fadezoomout)
                 break
             }
         }
@@ -183,23 +177,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     b.btLac.background = ContextCompat.getDrawable(this, R.drawable.round_sel)
                 else b.btLac.background = ContextCompat.getDrawable(this, R.drawable.round_non_sel)
 
-                isPreg = false
+                isPrg = false
                 b.btPreg.background = ContextCompat.getDrawable(this, R.drawable.round_non_sel)
                 searchE(b.etSea.text.toString(), isLacto)
             }
             b.btPreg.id -> {
-                isPreg = !isPreg
-                if (isPreg)
+                isPrg = !isPrg
+                if (isPrg)
                     b.btPreg.background = ContextCompat.getDrawable(this, R.drawable.round_sel)
                 else b.btPreg.background = ContextCompat.getDrawable(this, R.drawable.round_non_sel)
 
                 isLacto = false
                 b.btLac.background = ContextCompat.getDrawable(this, R.drawable.round_non_sel)
-                searchE(b.etSea.text.toString(), isPreg)
+                searchE(b.etSea.text.toString(), isPrg)
             }
             b.fabAdd.id -> {
-                if (askPermi()) return
-                contarct.launch("")
+                if (askPerm()) return
+                contract.launch("")
                 overridePendingTransition(R.anim.scalefrombot, R.anim.fadeout)
             }
         }
@@ -210,7 +204,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     //region PERMISSIONS----->>
 
-    private fun checkPermiStorage(): Boolean {
+    private fun checkPermStorage(): Boolean {
 
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             Environment.isExternalStorageManager()
@@ -222,14 +216,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun checkPermiCam(): Boolean {
+    private fun checkPermitCam(): Boolean {
         val result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
         return result == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun askPermi(): Boolean {
+    private fun askPerm(): Boolean {
         var ans = false
-        if (!checkPermiStorage()) {
+        if (!checkPermStorage()) {
             ans = true
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 try {
@@ -249,9 +243,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        if (!checkPermiCam()) {
+        if (!checkPermitCam()) {
             ans = true
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 100)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.POST_NOTIFICATIONS), 100)
+            else ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 100)
         }
 
         if (!Settings.canDrawOverlays(this)) {

@@ -132,17 +132,17 @@ class WidService : Service() {
 
                 } else if (motionEvent.action == MotionEvent.ACTION_UP) {
                     bc.root.visibility = View.INVISIBLE
-                    if (!canMove) { // click conditoin here
+                    if (!canMove) { // click condition here
                         if (b.mainCard.visibility != View.VISIBLE) b.mainCard.visibility = View.VISIBLE
                         else b.mainCard.visibility = View.GONE
 
                     }
                     if (isCUT) stopSelf() else {
                         val valueAnimator: ValueAnimator
-                        if (motionEvent.rawX < windowManager.defaultDisplay.width / 2) {
+                        if (motionEvent.rawX < resources.displayMetrics.widthPixels / 2) {
                             valueAnimator = ValueAnimator.ofInt(
                                 imgParams.x,
-                                windowManager.defaultDisplay.width
+                                resources.displayMetrics.widthPixels
                             )
                             isLeft = false
                         } else {
